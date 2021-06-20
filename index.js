@@ -31,6 +31,11 @@ const { checkVideoFormatsAndGetExtension } = require('./helpers/videoHelper');
 
     const mergedVideoFileName = process.env.MERGED_VIDEO_FOLDER + Date.now() + '.' + extension;
 
+    if(videoPaths.length <= 1) {
+      console.error('ERROR: There must be more than one video on videos folder.');
+      process.exit(1);
+    }
+
     await ffmpegConcat({
       output: mergedVideoFileName,
       videos: videoPaths,
